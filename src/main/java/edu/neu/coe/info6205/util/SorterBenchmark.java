@@ -1,5 +1,7 @@
 package edu.neu.coe.info6205.util;
 
+import edu.neu.coe.info6205.sort.Helper;
+import edu.neu.coe.info6205.sort.InstrumentedHelper;
 import edu.neu.coe.info6205.sort.SortWithHelper;
 
 import java.util.function.Consumer;
@@ -14,7 +16,8 @@ import static edu.neu.coe.info6205.util.Utilities.formatWhole;
  *
  * @param <T> the underlying type to be sorted.
  */
-public class SorterBenchmark<T extends Comparable<T>> extends Benchmark_Timer<T[]> {
+public class
+SorterBenchmark<T extends Comparable<T>> extends Benchmark_Timer<T[]> {
 
     /**
      * Run a benchmark on a sorting problem with N elements.
@@ -26,6 +29,13 @@ public class SorterBenchmark<T extends Comparable<T>> extends Benchmark_Timer<T[
         logger.info("run: sort " + formatWhole(N) + " elements using " + this);
         sorter.init(N);
         final double time = super.runFromSupplier(() -> generateRandomArray(ts), nRuns);
+        Helper<T> helper = sorter.getHelper();
+        if (helper.instrumented()) {
+            InstrumentedHelper<T> instrumentedHelper = (InstrumentedHelper<T>) helper;
+            logger.info("With Instrumentation: "  + instrumentedHelper.showStats());
+        } else {
+            logger.info("Without Instrumentation: "  + helper.showStats());
+        }
         for (TimeLogger timeLogger : timeLoggers) timeLogger.log(time, N);
     }
 

@@ -3,17 +3,26 @@
  */
 package edu.neu.coe.info6205.sort.elementary;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Consumer;
+
 import com.phasmidsoftware.args.Args;
-import edu.neu.coe.info6205.sort.*;
+
+import edu.neu.coe.info6205.sort.BaseHelper;
+import edu.neu.coe.info6205.sort.Helper;
+import edu.neu.coe.info6205.sort.InstrumentedHelper;
+import edu.neu.coe.info6205.sort.SortException;
+import edu.neu.coe.info6205.sort.SortWithHelper;
 import edu.neu.coe.info6205.util.Config;
 import edu.neu.coe.info6205.util.LazyLogger;
 import edu.neu.coe.info6205.util.Stopwatch;
 import scala.collection.immutable.Seq;
 import scala.util.Try;
-
-import java.io.IOException;
-import java.util.*;
-import java.util.function.Consumer;
 
 /**
  * Class to implement Shell Sort.
